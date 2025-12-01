@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .list {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .list li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .list li a:hover {
+            color: #ff6b35;
+        }
+
+        .icon {
+            display: none;
+            gap: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .icon i {
+            color: #333;
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .list {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: #fff;
+                width: 100%;
+                padding: 2rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+            }
+
+            .list.active {
+                left: 0;
+            }
+
+            .icon {
+                display: flex;
+            }
+        }
+
+        /* Home Section */
+        #Home {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8dc 100%);
+        }
+
+        .conter {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .hero h1 span {
+            color: #ff6b35;
+        }
+
+        .hero p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .parimay-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #ff6b35;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s;
+        }
+
+        .parimay-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .parimay-btn a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .mian-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* About Section */
+        #About {
+            padding: 4rem 2rem;
+            background: #fff;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .hero h3 {
+            color: #ff6b35;
+            margin: 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .btn a {
+            background: #ff6b35;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .btn a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Menu Section */
+        #Menu {
+            padding: 4rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .menu h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .menu h1 span {
+            color: #ff6b35;
+        }
+
+        .menu-box {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .menu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .small-card {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .small-card i {
+            color: #ff6b35;
+            font-size: 1.2rem;
+        }
+
+        .menu-inf {
+            padding: 1.5rem;
+        }
+
+        .menu-inf h2 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-inf p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .menu-inf h3 {
+            color: #ff6b35;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-icon {
+            margin-bottom: 1rem;
+        }
+
+        .menu-icon i {
+            color: #ffd700;
+            font-size: 0.9rem;
+        }
+
+        .menu-btn {
+            display: inline-block;
+            background: #ff6b35;
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s;
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Gallery Section */
+        #Gallery {
+            padding: 4rem 2rem;
+            background: #fff;
+        }
+
+        .gallery h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .gallery h1 span {
+            color: #ff6b35;
+        }
+
+        .gallery-image-box {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .image:hover img {
+            transform: scale(1.1);
+        }
+
+        .image h3 {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            color: #fff;
+            font-size: 1.5rem;
+            z-index: 2;
+        }
+
+        .image p {
+            position: absolute;
+            bottom: 50px;
+            left: 20px;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .image a {
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            background: #ff6b35;
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            z-index: 2;
+        }
+
+        .image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        /* Review Section */
+        #Review {
+            padding: 4rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .review h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .review h1 span {
+            color: #ff6b35;
+        }
+
+        .review-box {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .review-profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid #ff6b35;
+        }
+
+        .review-text h2 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-icon {
+            margin: 1rem 0;
+        }
+
+        .review-icon i {
+            color: #ffd700;
+        }
+
+        .review-social {
+            margin: 1rem 0;
+        }
+
+        .review-social i {
+            color: #ff6b35;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .review-text p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Order Section */
+        #Order {
+            padding: 4rem 2rem;
+            background: #fff;
+        }
+
+        .order h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .order h1 span {
+            color: #ff6b35;
+        }
+
+        .order-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .order-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        form {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .input {
+            margin-bottom: 1.5rem;
+        }
+
+        .input p {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .input input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .order-btn {
+            display: inline-block;
+            background: #ff6b35;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Team Section */
+        .team {
+            padding: 4rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .team h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .team h1 span {
+            color: #ff6b35;
+        }
+
+        .team-box {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .profile {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .profile:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .info {
+            padding: 1.5rem;
+        }
+
+        .info .name {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .info .bio {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-icon i {
+            color: #ff6b35;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-mian {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-tage h2 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-tage p {
+            color: #ddd;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .footer-tage i {
+            color: #ff6b35;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .conter {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .menu-box {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .order-main {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-image-box {
+                grid-template-columns: 1fr;
+            }
+
+            .review-box {
+                grid-template-columns: 1fr;
+            }
+
+            .team-box {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-mian {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .logo {
+                padding: 0 1rem;
+            }
+
+            #Home, #About, #Menu, #Gallery, #Review, #Order, .team {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .menu h1, .gallery h1, .review h1, .order h1, .team h1 {
+                font-size: 1.8rem;
+            }
+
+            .menu-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50?text=LOGO" alt="Logo">
+            <ul class="list" id="menuList">
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#Menu">Menu</a></li>
+                <li><a href="#Gallery">Gallery</a></li>
+                <li><a href="#Review">Review</a></li>
+                <li><a href="#Order">Order</a></li>
+            </ul>
+            <div class="icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="Home">
+        <div class="conter">
+            <div class="hero">
+                <h1>Get Fresh <span>Food</span><br>in a Easy Way</h1>
+                <p>Experience the finest cuisine delivered right to your doorstep. We pride ourselves on using only the freshest ingredients to create memorable dining experiences. Your satisfaction is our priority.</p>
+                <div class="parimay-btn">
+                    <a href="#Order">Order Now</a>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+            <div class="mian-image">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Fresh Food">
+            </div>
+        </div>
+    </section>
+
+    <section id="About">
+        <div class="conter">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800" alt="About Us">
+            </div>
+            <div class="hero">
+                <h1><span>About</span>&nbsp;Us</h1>
+                <h3>Why Choose Us</h3>
+                <p>We are committed to delivering exceptional quality and service. Our expert chefs prepare each dish with passion and precision, ensuring every bite is a delight. With years of experience and countless satisfied customers, we've become a trusted name in food delivery.</p>
+                <div class="btn">
+                    <a href="#Order">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Menu">
+        <div class="menu">
+            <h1>Our <span>Menu</span></h1>
+            <div class="menu-box">
+                <div class="menu-card">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" alt="Burger">
+                    </div>
+                    <div class="small-card">
+                        <i class="fa-sharp fa-solid fa-heart"></i>
+                    </div>
+                    <div class="menu-inf">
+                        <h2>Burger</h2>
+                        <p>Delicious juicy burger with fresh ingredients and special sauce</p>
+                        <h3>$20.00</h3>
+                        <div class="menu-icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <a href="#Order" class="menu-btn">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" alt="Pizza">
+                    </div>
+                    <div class="small-card">
+                        <i class="fa-sharp fa-solid fa-heart"></i>
+                    </div>
+                    <div class="menu-inf">
+                        <h2>Pizza</h2>
+                        <p>Authentic Italian pizza with premium toppings and cheese</p>
+                        <h3>$20.00</h3>
+                        <div class="menu-icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <a href="#Order" class="menu-btn">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="Salad">
+                    </div>
+                    <div class="small-card">
+                        <i class="fa-sharp fa-solid fa-heart"></i>
+                    </div>
+                    <div class="menu-inf">
+                        <h2>Fresh Salad</h2>
+                        <p>Healthy mixed greens with fresh vegetables and dressing</p>
+                        <h3>$15.00</h3>
+                        <div class="menu-icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <a href="#Order" class="menu-btn">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400" alt="Pasta">
+                    </div>
+                    <div class="small-card">
+                        <i class="fa-sharp fa-solid fa-heart"></i>
+                    </div>
+                    <div class="menu-inf">
+                        <h2>Pasta</h2>
+                        <p>Creamy pasta with your choice of sauce and garnish</p>
+                        <h3>$18.00</h3>
+                        <div class="menu-icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <a href="#Order" class="menu-btn">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400" alt="Cake">
+                    </div>
+                    <div class="small-card">
+                        <i class="fa-sharp fa-solid fa-heart"></i>
+                    </div>
+                    <div class="menu-inf">
+                        <h2>Cake</h2>
+                        <p>Delicious homemade cake with rich frosting layers</p>
+                        <h3>$12.00</h3>
+                        <div class="menu-icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <a href="#Order" class="menu-btn">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400" alt="Food">
+                    </div>
+                    <div class="small-card">
+                        <i class="fa-sharp fa-solid fa-heart"></i>
+                    </div>
+                    <div class="menu-inf">
+                        <h2>Special Dish</h2>
+                        <p>Chef's special creation with unique flavors and style</p>
+                        <h3>$25.00</h3>
+                        <div class="menu-icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-sharp fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <a href="#Order" class="menu-btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Gallery">
+        <div class="gallery">
+            <h1>Our <span>Gallery</span></h1>
+            <div class="gallery-image-box">
+                <div class="image">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" alt="Food">
+                    <h3>Gourmet Dishes</h3>
+                    <p>Exquisite culinary creations</p>
+                    <a href="#Order">Order Now</a>
+                </div>
+                <div class="image">
+                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600" alt="Food">
+                    <h3>Fresh Ingredients</h3>
+                    <p>Quality you can taste</p>
+                    <a href="#Order">Order Now</a>
+                </div>
+                <div class="image">
+                    <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600" alt="Food">
+                    <h3>Breakfast Special</h3>
+                    <p>Start your day right</p>
+                    <a href="#Order">Order Now</a>
+                </div>
+                <div class="image">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600" alt="Food">
+                    <h3>Delicious Meals</h3>
+                    <p>Comfort food at its best</p>
+                    <a href="#Order">Order Now</a>
+                </div>
+                <div class="image">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600" alt="Food">
+                    <h3>Sweet Treats</h3>
+                    <p>Desserts to remember</p>
+                    <a href="#Order">Order Now</a>
+                </div>
+                <div class="image">
+                    <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=600" alt="Food">
+                    <h3>Beverages</h3>
+                    <p>Refreshing drinks selection</p>
+                    <a href="#Order">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Review">
+        <div class="review">
+            <h1>Customer <span>Reviews</span></h1>
+            <div class="review-box">
+                <div class="review-card">
+                    <div class="review-profile">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John">
+                    </div>
+                    <div class="review-text">
+                        <h2>John Doe</h2>
+                        <div class="review-icon">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i
