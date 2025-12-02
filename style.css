@@ -368,10 +368,16 @@ html{
     .menu-box {
         grid-template-columns: 1fr 1fr;
     }
+    .menu h1{
+        font-size: 40px;
+    }
 }
 @media (max-width: 520px) {
     .menu-box {
         grid-template-columns: 1fr;
+    }
+    .menu h1{
+        font-size: 30px;
     }
 }
 .gallery{
@@ -475,6 +481,9 @@ html{
     .gallery-image-box {
         grid-template-columns: 1fr;
     }
+    .gallery h1{
+        font-size: 30px;
+    }
 }
 .review{
     width: 100%;
@@ -496,7 +505,7 @@ html{
     margin: 70px auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 15px;
+    grid-gap: 10px;
 }
 .review-card{
      width: 250px;
@@ -556,12 +565,10 @@ html{
 .review-text p{
     text-align: center;
     line-height: 22px;
-    opacity: 0;
+    opacity: 1;
     transition: 0.3s;
 }
-.review-card:hover p{
-    opacity: 1;
-}
+
 /*responsive*/
 @media( max-width :992px){
     .review-box{
@@ -576,6 +583,9 @@ html{
 @media (max-width: 520px) {
     .review-box {
         grid-template-columns: 1fr;
+    }
+    .review h1{
+        font-size: 30px;
     }
 }
 .order {
@@ -657,6 +667,9 @@ html{
         display: grid;
         grid-template-columns: 1fr; 
     }
+    .order h1{
+        font-size: 30px;
+    }
 }
 .team {
     width: 100%;
@@ -688,8 +701,8 @@ html{
 }
 
 .profile {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     margin: 0 15px;
     display: flex;
@@ -757,15 +770,24 @@ html{
     .team-box{
       grid-template-columns: 1fr 1fr 1fr;
     }
+    .team h1{
+        font-size:50px;
+    }
 }
 @media (max-width: 768px) {
     .team-box {
         grid-template-columns: 1fr ;
     }
+    .team h1{
+        font-size: 40px;
+    }
 }
 @media (max-width: 520px) {
     .team-box {
         grid-template-columns: 1fr;
+    }
+    .team h1{
+        font-size: 30px;
     }
 }
 footer {
