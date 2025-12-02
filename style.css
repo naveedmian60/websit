@@ -91,19 +91,37 @@ html{
     }
 }
 .conter{
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-around;
     align-items: center;
     margin-top: 10px;
    position: relative;
    padding: 70px 0;
+}
+.mian-box{
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-around;
+}
+.mian-card{
+      width: 350px;
+     height: 245px;
+     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.5);
+     border-radius: 8px;
+     padding: 8px 20px;
+   
+}
+.mian-image img{
+    height: 100%;
+    width: 100%;  
 }
 .hero{
     max-width: 50%;
 }
 .hero h1{
     font-size: 55px;
-    margin-left: 70px;
+    margin-left: 10px;
 }
 .hero h1 span{
     color: var(--color);
@@ -111,13 +129,13 @@ html{
 }
 .hero p{
     line-height: 22px;
-    margin-left: 70px;
+    margin-left: 10px;
 }
 .parimay-btn{
     display: flex;
     align-items: center;
     position: relative;
-    margin: 40px 0  0 60px;
+    margin: 40px 0  0 10px;
     background: var(--color);
     padding: 17px 25px;
     max-width: 150px;
@@ -137,32 +155,71 @@ html{
     transform: translate(7px);
 }
 /*hero responsive*/
-@media (max-width: 992px) {
-   .mian-image{
-        display: none;
-    }
-      .hero h1{
-            display: none;
-        }
-    @media (max-width: 768px){
-
-        .hero h1{
-            display: none;
-        }
-    }
-    @media (max-width: 520px){
-        .hero h1{
-            display: none;
-        }
-    }
- .hero p.parimay-btn.show{
-        display: flex;
-    }
+@media (max-width: 992px){
+  .hero h1{
+    font-size: 45px;
+  }
+  .hero p{
+    font-size: 14px;
+  }
 }
+
+
+@media (max-width: 768px){
+  .conter{
+    flex-direction: column; 
+    text-align: center;
+    gap: 30px;
+  }
+  .hero{
+    max-width: 90%;
+  }
+  .hero h1{
+    font-size: 34px;
+  }
+  .hero p{
+    font-size: 12px;
+  }
+  .parimay-btn{
+    margin: 25px auto;
+  }
+}
+
+
+@media (max-width: 520px){
+  .hero h1{
+    font-size: 28px;
+  }
+  .hero p{
+    display: none;
+  }
+  .mian-card{
+    width: 280px;
+  }
+}
+
+
 .hero h3{
    font-size: 20px;
- margin-left: 70px;
+ margin-left: 10px;
   
+}
+.about-box{
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+.about-card{
+     width: 350px;
+     height: 245px;
+     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.5);
+     border-radius: 8px;
+     padding: 8px 20px;
+}
+.about-image img{
+    height: 100%;
+    width: 100%;
 }
 .btn{
     display: flex;
@@ -170,7 +227,7 @@ html{
     padding: 15px 23px;
     max-width: 150px;
     margin-top: 20px;
-    margin-left: 70px;
+    margin-left: 10px;
 }
 .btn a{
     text-decoration: none;
@@ -182,12 +239,19 @@ html{
     background: var(--color);
     cursor: pointer;
 }
-@media (max-width: 800px) {
-   .about-image{
-        display: none;
+@media (max-width: 768px) {
+    .conter{
+        flex-direction: column;
+        text-align: center;
     }
- .hero.btn.show{
-        display: flex;
+    .about-box, .hero{
+        width: 100%;
+    }
+    .btn{
+        margin: 20px auto;
+    }
+    .hero h3{
+        margin-left: 0;
     }
 }
 .menu{
@@ -435,7 +499,7 @@ html{
     grid-gap: 15px;
 }
 .review-card{
-     width: 350px;
+     width: 250px;
     height: 485px;
     box-shadow: 0 2px 8px rgb(0, 0, 0, 0.5);
     border-radius: 8px;
@@ -624,8 +688,8 @@ html{
 }
 
 .profile {
-    width: 320px;
-    height: 320px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     margin: 0 15px;
     display: flex;
@@ -681,7 +745,7 @@ html{
 }
 
 .team-icon i {
-    margin: 10px 5px 5px 0;
+    margin:3px 5px 5px 0;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -696,7 +760,7 @@ html{
 }
 @media (max-width: 768px) {
     .team-box {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr ;
     }
 }
 @media (max-width: 520px) {
