@@ -28,7 +28,7 @@ html {
 }
 
 .order-card {
-    background: linear-gradient(white, grey);
+    background: linear-gradient(rgb(255, 254, 254), grey);
 
 }
 
