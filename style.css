@@ -582,6 +582,7 @@ html {
 
     .image h3 {
         font-size: 28px;
+        margin-left:40px;
     }
 
     .image p {
@@ -733,7 +734,7 @@ html {
     }
 
     .review-card {
-        width: 200px;
+        width: 250px;
         height: 400px;
         margin: 10px auto;
     }
