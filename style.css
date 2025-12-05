@@ -735,7 +735,7 @@ html {
 
     .review-card {
         width: 250px;
-        height: 400px;
+        height: 450px;
         margin: 10px auto;
     }
 
@@ -884,6 +884,9 @@ html {
 
     .input input {
         width: 220px;
+    }
+    .order-btn{
+        font-size: 15px;
     }
 }
 
